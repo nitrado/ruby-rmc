@@ -34,11 +34,14 @@ module RMC
           url: "/backup-sets",
           method: :post,
           payload: {
-              recoverySet: data
+              backupSet: data
           }
       )
 
-      RMC::Item::ExpressProtect.new(@connection, response['backupSet'])
+      # Blocks async task
+      response = @connection.wait_for_task(response['taskUri'].split('/').last)
+
+      get_set(response['associatedResource']['resourceUri'].split('/').last)
     end
 
   end

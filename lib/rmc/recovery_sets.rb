@@ -30,7 +30,7 @@ module RMC
     end
 
     def create_set(data)
-      result = @connection.request(
+      response = @connection.request(
           url: "/recovery-sets",
           method: :post,
           payload: {
@@ -39,9 +39,9 @@ module RMC
       )
 
       # Blocks async task
-      result = @connection.wait_for_task(result['taskUri'].split('/').last)
+      response = @connection.wait_for_task(response['taskUri'].split('/').last)
 
-      get_set(result['associatedResource']['resourceUri'].split('/').last)
+      get_set(response['associatedResource']['resourceUri'].split('/').last)
     end
 
   end
