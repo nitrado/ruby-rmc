@@ -39,7 +39,7 @@ module RMC::Item
     end
 
     def add_volume(volume)
-      request(
+      response = @connection.request(
           :url => "/recovery-sets/#{@id}/add",
           :method => :post,
           :payload => {
@@ -48,11 +48,13 @@ module RMC::Item
               }
           }
       )
+
+      @connection.wait_for_task(response['taskUri'].split('/').last)
       true
     end
 
     def remove_volume(volume)
-      request(
+      response = @connection.request(
           :url => "/recovery-sets/#{@id}/delete",
           :method => :delete,
           :payload => {
@@ -61,6 +63,40 @@ module RMC::Item
               }
           }
       )
+
+      @connection.wait_for_task(response['taskUri'].split('/').last)
+      true
+    end
+
+    def detach_volume(volume, hostname)
+      response = @connection.request(
+          :url => "/recovery-sets/#{@id}/detach",
+          :method => :post,
+          :payload => {
+              recoverySet: {
+                  volumelist: [volume],
+                  hostname: hostname
+              }
+          }
+      )
+
+      @connection.wait_for_task(response['taskUri'].split('/').last)
+      true
+    end
+
+    def attach_volume(volume, hostname)
+      response = @connection.request(
+          :url => "/recovery-sets/#{@id}/attach",
+          :method => :post,
+          :payload => {
+              recoverySet: {
+                  volumelist: [volume],
+                  hostname: hostname
+              }
+          }
+      )
+
+      @connection.wait_for_task(response['taskUri'].split('/').last)
       true
     end
 
@@ -71,8 +107,6 @@ module RMC::Item
       )
       true
     end
-
-
 
   end
 
