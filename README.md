@@ -2,6 +2,10 @@
 
 This is a Ruby library for the HPE Recovery Manger Central (RMC).
 
+## Good to know
+
+This library is synchrony and will wait for all async RMC API tasks until the are successful or have failed.
+
 ## Installation
 
 Add the Ruby RMC as dependency to your project Gemfile: 

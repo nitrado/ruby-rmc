@@ -21,6 +21,21 @@ Gem::Specification.new do |s|
       "VERSION",
       "lib/rmc.rb",
       "lib/rmc/connection.rb",
+      "lib/rmc/scheduler.rb",
+      "lib/rmc/recovery_sets.rb",
+      "lib/rmc/snapshot_sets.rb",
+      "lib/rmc/express_protects.rb",
+      "lib/rmc/volumes.rb",
+      "lib/rmc/storage_systems.rb",
+      "lib/rmc/backup_systems.rb",
+      "lib/rmc/backup_policies.rb",
+      "lib/rmc/item/schedule.rb",
+      "lib/rmc/item/recovery_set.rb",
+      "lib/rmc/item/express_protect.rb",
+      "lib/rmc/item/storage_pool.rb",
+      "lib/rmc/item/volume.rb",
+      "lib/rmc/item/snapshot_set.rb",
+      "lib/rmc/item/backup_policy.rb",
   ]
   s.homepage = "https://github.com/nitrado/RMC"
   s.rubygems_version = "2.4.8"
