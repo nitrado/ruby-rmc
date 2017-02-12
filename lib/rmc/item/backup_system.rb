@@ -32,7 +32,7 @@ module RMC::Item
     end
 
     def delete
-      request(
+      @connection.request(
           :url => "/backup-systems/#{@id}",
           :method => :delete,
       )

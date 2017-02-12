@@ -9,6 +9,7 @@ module RMC::Item
     attr_reader :name
     attr_reader :description
     attr_reader :status
+    attr_reader :createdAt
 
     attr_reader :snapCount
     attr_reader :removeOldestSnap
@@ -17,7 +18,6 @@ module RMC::Item
     attr_reader :removeOldestBackup
 
     attr_reader :volumelist
-    attr_reader :createdAt
 
     def initialize(connection, data)
       @connection = connection
@@ -26,6 +26,7 @@ module RMC::Item
       @name = data['name']
       @description = data['description']
       @status = data['status']
+      @createdAt = data['createdAt']
 
       @snapCount = data['snapCount']
       @removeOldestSnap = data['removeOldestSnap']
@@ -35,7 +36,6 @@ module RMC::Item
 
       @volumelist = data['volumelist']
 
-      @createdAt = data['createdAt']
     end
 
     def add_volume(volume)

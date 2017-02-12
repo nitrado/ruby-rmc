@@ -36,6 +36,7 @@ Gem::Specification.new do |s|
       "lib/rmc/item/volume.rb",
       "lib/rmc/item/snapshot_set.rb",
       "lib/rmc/item/backup_policy.rb",
+      "lib/rmc/item/host.rb",
   ]
   s.homepage = "https://github.com/nitrado/RMC"
   s.rubygems_version = "2.4.8"

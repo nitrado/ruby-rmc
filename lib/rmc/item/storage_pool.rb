@@ -26,8 +26,21 @@ module RMC::Item
       @protocol = data['protocol']
     end
 
+    def get_hosts
+      response = @connection.request(
+          :url => "/storage-pools/#{@id}/hosts",
+      )
+
+      hosts = []
+      response['hosts'].each do |_data|
+        hosts << RMC::Item::Host.new(@connection, _data)
+      end
+
+      hosts
+    end
+
     def delete
-      request(
+      @connection.request(
           :url => "/storage-pools/#{@id}",
           :method => :delete,
       )

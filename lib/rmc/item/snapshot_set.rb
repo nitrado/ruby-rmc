@@ -32,7 +32,7 @@ module RMC::Item
     end
 
     def delete
-      request(
+      @connection.request(
           :url => "/snapshot-sets/#{@id}",
           :method => :delete,
       )

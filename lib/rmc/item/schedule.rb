@@ -48,7 +48,7 @@ module RMC::Item
     end
 
     def delete
-      request(
+      @connection.request(
           :url => "/schedule-jobs/#{@id}",
           :method => :delete,
       )

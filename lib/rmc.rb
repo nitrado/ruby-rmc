@@ -23,6 +23,7 @@ module RMC
   require 'rmc/item/backup_system'
   require 'rmc/item/snapshot_set'
   require 'rmc/item/backup_policy'
+  require 'rmc/item/host'
 
   class Exception < ::RuntimeError
   end
