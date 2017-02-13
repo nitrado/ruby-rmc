@@ -8,9 +8,9 @@ module RMC
       @connection = connection
     end
 
-    def list_sets
+    def list_sets(query=nil)
       response = @connection.request(
-          url: "/backup-sets",
+          url: "/backup-sets#{query ? "?query=\"#{query}\"" : ''}"
       )
 
       backup_sets = []
@@ -29,14 +29,18 @@ module RMC
       RMC::Item::ExpressProtect.new(@connection, response['backupSet'])
     end
 
-    def create_set(data)
-      response = @connection.request(
+    def create_set_async(data)
+      @connection.request(
           url: "/backup-sets",
           method: :post,
           payload: {
               backupSet: data
           }
       )
+    end
+
+    def create_set(data)
+      response = create_set_async(data)
 
       # Blocks async task
       response = @connection.wait_for_task(response['taskUri'].split('/').last)
