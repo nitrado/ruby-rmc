@@ -103,6 +103,20 @@ module RMC::Item
       true
     end
 
+    def update(data)
+      response = @connection.request(
+          url: "/recovery-sets/#{@id}",
+          method: :put,
+          payload: {
+              recoverySet: data
+          }
+      )
+
+      # Blocks async task
+      @connection.wait_for_task(response['taskUri'].split('/').last)
+      true
+    end
+
     def delete
       @connection.request(
           :url => "/recovery-sets/#{@id}",
