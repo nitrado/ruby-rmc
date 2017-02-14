@@ -31,4 +31,7 @@ module RMC
   class LoginError < Exception
   end
 
+  class NotFoundException < Exception
+  end
+
 end

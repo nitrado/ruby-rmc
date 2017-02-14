@@ -27,6 +27,15 @@ module RMC::Item
       )
     end
 
+    def restore_to_parent_volumes
+      response = @connection.request(
+          :url => "/backup-sets/#{@id}/restore",
+          :method => :post
+      )
+
+      @connection.wait_for_task(response['taskUri'].split('/').last)
+    end
+
   end
 
 end

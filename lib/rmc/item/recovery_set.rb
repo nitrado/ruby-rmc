@@ -18,6 +18,7 @@ module RMC::Item
     attr_reader :removeOldestBackup
 
     attr_reader :volumelist
+    attr_reader :volumes
 
     def initialize(connection, data)
       @connection = connection
@@ -36,12 +37,14 @@ module RMC::Item
 
       @volumelist = data['volumelist']
 
+      @volumes = data['volumes']
+
     end
 
     def add_volume(volume)
       response = @connection.request(
           :url => "/recovery-sets/#{@id}/add",
-          :method => :post,
+          :method => :put,
           :payload => {
               recoverySet: {
                   volumelist: [volume]
@@ -56,7 +59,7 @@ module RMC::Item
     def remove_volume(volume)
       response = @connection.request(
           :url => "/recovery-sets/#{@id}/delete",
-          :method => :delete,
+          :method => :put,
           :payload => {
               recoverySet: {
                   volumelist: [volume]
@@ -101,11 +104,10 @@ module RMC::Item
     end
 
     def delete
-      request(
+      @connection.request(
           :url => "/recovery-sets/#{@id}",
           :method => :delete,
       )
-      true
     end
 
   end

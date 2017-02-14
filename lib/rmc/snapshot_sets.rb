@@ -8,9 +8,9 @@ module RMC
       @connection = connection
     end
 
-    def list_sets
+    def list_sets(query=nil)
       response = @connection.request(
-          url: "/snapshot-sets"
+          url: "/snapshot-sets#{query ? "?query=\"#{query}\"" : ''}"
       )
 
       recovery_sets = []
