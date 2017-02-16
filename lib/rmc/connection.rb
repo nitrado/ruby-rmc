@@ -49,7 +49,7 @@ module RMC
         @logger.info("RMC: Result: #{result}")
 
         result
-      rescue RestClient::Exception, JSON::ParserError => e
+      rescue RestClient::Exception
         if e.http_code == 401
           raise RMC::LoginException, e.http_body
         end
@@ -59,6 +59,8 @@ module RMC
         end
 
         raise RMC::Exception, e.http_body
+      rescue JSON::ParserError => e
+        raise RMC::NotFoundException, e.to_s
       end
     end
 
