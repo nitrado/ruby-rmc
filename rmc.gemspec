@@ -49,20 +49,20 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<mocha>, [">= 0"])
       s.add_development_dependency(%q<rake>, [">= 0"])
       s.add_development_dependency(%q<test-unit>, [">= 0"])
-      s.add_runtime_dependency(%q<json>, [">= 0"])
+      s.add_runtime_dependency(%q<oj>, [">= 0"])
       s.add_runtime_dependency(%q<rest-client>, [">= 1.8"])
     else
       s.add_dependency(%q<mocha>, [">= 0"])
       s.add_dependency(%q<rake>, [">= 0"])
       s.add_dependency(%q<test-unit>, [">= 0"])
-      s.add_dependency(%q<json>, [">= 0"])
+      s.add_dependency(%q<oj>, [">= 0"])
       s.add_dependency(%q<rest-client>, [">= 1.8"])
     end
   else
     s.add_dependency(%q<mocha>, [">= 0"])
     s.add_dependency(%q<rake>, [">= 0"])
     s.add_dependency(%q<test-unit>, [">= 0"])
-    s.add_dependency(%q<json>, [">= 0"])
+    s.add_dependency(%q<oj>, [">= 0"])
     s.add_dependency(%q<rest-client>, [">= 1.8"])
   end
 end

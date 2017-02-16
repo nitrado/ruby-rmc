@@ -35,7 +35,7 @@ module RMC
 
       # If payload provided, encode it
       if data[:payload]
-       data[:payload] = JSON.dump(data[:payload])
+       data[:payload] = Oj.dump(data[:payload])
       end
 
       if @token
@@ -45,11 +45,11 @@ module RMC
       @logger.info("RMC: Request: #{data}")
 
       begin
-        result = JSON.parse(RestClient::Request.execute(data))
+        result = Oj.safe_load(RestClient::Request.execute(data))
         @logger.info("RMC: Result: #{result}")
 
         result
-      rescue RestClient::Exception
+      rescue RestClient::Exception => e
         if e.http_code == 401
           raise RMC::LoginException, e.http_body
         end
@@ -59,8 +59,8 @@ module RMC
         end
 
         raise RMC::Exception, e.http_body
-      rescue JSON::ParserError => e
-        raise RMC::NotFoundException, e.to_s
+      rescue Oj::Error => e
+        raise RMC::Exception, e.to_s
       end
     end
 

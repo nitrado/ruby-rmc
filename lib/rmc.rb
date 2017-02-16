@@ -3,6 +3,7 @@
 module RMC
 
   require 'rest-client'
+  require 'oj'
   require 'timeout'
 
   require 'rmc/connection'
