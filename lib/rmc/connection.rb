@@ -11,6 +11,9 @@ module RMC
       @url = "#{url}/rest/rm-central/v1"
       @verify_ssl = verify_ssl
       @logger = Logger.new('/dev/null')
+      Oj.default_options = {
+          :mode => :compat
+      }
 
       create_token(username, password)
     end

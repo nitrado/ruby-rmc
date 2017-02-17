@@ -20,9 +20,9 @@ module RMC
       @connection = connection
     end
 
-    def list_schedules
+    def list_schedules(query=nil)
       response = @connection.request(
-        url: "/schedule-jobs"
+        url: "/schedule-jobs#{query ? "?query=\"#{query}\"" : ''}"
       )
 
       schedules = []
