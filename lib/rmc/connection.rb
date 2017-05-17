@@ -4,11 +4,13 @@ module RMC
 
     attr_reader :url
     attr_reader :token
+    attr_writer :version
 
     attr_accessor :logger
 
-    def initialize(url, username, password, verify_ssl = true)
-      @url = "#{url}/rest/rm-central/v1"
+    def initialize(url, username, password, verify_ssl = true, version = 1)
+      @url = "#{url}/rest/rm-central/"
+      @version = version
       @verify_ssl = verify_ssl
       @logger = Logger.new('/dev/null')
       Oj.default_options = {
@@ -25,7 +27,7 @@ module RMC
           verify_ssl: @verify_ssl,
       }.merge(params)
 
-      data[:url] = "#{@url}#{data[:url]}"
+      data[:url] = "#{@url}v#{@version}#{data[:url]}"
 
       unless data.has_key?(:headers)
         data[:headers] = {}
@@ -68,12 +70,21 @@ module RMC
     end
 
     def wait_for_task(id)
-
+      @version = 2
       begin
         Timeout.timeout(1800) do
-          result = request(
-              :url => "/tasks/#{id}"
-          )['task']
+          while true
+            begin
+              result = request(
+                  :url => "/tasks/#{id}"
+              )['task']
+              break
+            rescue RMC::NotFoundException
+              @logger.info("RMC: Task #{id} not found, waiting...")
+              sleep(5)
+            end
+          end
+
           state = result['taskState']
 
           while state == 'Running'
@@ -96,6 +107,8 @@ module RMC
         end
       rescue TimeoutError
         raise RMC::Exception, "Task #{id} timeout"
+      ensure
+        @version = 1
       end
     end
 
