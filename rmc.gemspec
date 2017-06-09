@@ -10,10 +10,9 @@ Gem::Specification.new do |s|
   s.email = ["alexander.birkner@marbis.net"]
   s.extra_rdoc_files = [
       "README.md",
-      "LICENSE.md",
+      "LICENSE",
   ]
   s.files = [
-      "VERSION",
       "lib/rmc.rb",
       "lib/rmc/connection.rb",
       "lib/rmc/scheduler.rb",
