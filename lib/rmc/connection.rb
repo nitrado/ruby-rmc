@@ -105,7 +105,7 @@ module RMC
 
           raise RMC::Exception, "Task #{id} failed, got state #{state}"
         end
-      rescue TimeoutError
+      rescue Timeout::Error
         raise RMC::Exception, "Task #{id} timeout"
       ensure
         @version = 1
