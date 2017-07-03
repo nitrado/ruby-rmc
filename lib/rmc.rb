@@ -15,6 +15,7 @@ module RMC
   require 'rmc/storage_systems'
   require 'rmc/backup_systems'
   require 'rmc/backup_policies'
+  require 'rmc/tasks'
   require 'rmc/item/schedule'
   require 'rmc/item/recovery_set'
   require 'rmc/item/express_protect'
@@ -25,6 +26,7 @@ module RMC
   require 'rmc/item/snapshot_set'
   require 'rmc/item/backup_policy'
   require 'rmc/item/host'
+  require 'rmc/item/task'
 
   class Exception < ::RuntimeError
   end

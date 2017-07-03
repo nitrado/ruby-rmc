@@ -31,6 +31,16 @@ module RMC::Item
       @snapRetention = data['snapRetention']
     end
 
+    def update(data)
+      @connection.request(
+          :url => "/snapshot-sets/#{@id}",
+          :method => :put,
+          :payload => {
+              snapshotSet: data
+          }
+      )
+    end
+
     def delete
       @connection.request(
           :url => "/snapshot-sets/#{@id}",
