@@ -8,6 +8,7 @@ module RMC::Item
     attr_reader :id
     attr_reader :name
     attr_reader :status
+    attr_reader :backups
     attr_reader :createdAt
     attr_reader :recoverySetId
 
@@ -17,9 +18,20 @@ module RMC::Item
       @id = data['id']
       @name = data['name']
       @status = data['status']
+      @backups = data['backups']
       @createdAt = data['createdAt']
       @recoverySetId = data['recoverySetId']
 
+    end
+
+    def update(data)
+      @connection.request(
+          :url => "/backup-sets/#{@id}",
+          :method => :put,
+          :payload => {
+              backupSet: data
+          }
+      )
     end
 
     def delete
