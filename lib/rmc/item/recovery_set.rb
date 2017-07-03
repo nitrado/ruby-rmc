@@ -103,6 +103,20 @@ module RMC::Item
       true
     end
 
+    def refresh
+      response = @connection.request(
+          url: "/recovery-sets/#{@id}/refresh",
+          method: :put,
+          payload: {
+              recoverySet: {
+                  fullRefresh: true
+              }
+          }
+      )
+      @connection.wait_for_task(response['taskUri'].split('/').last)
+      true
+    end
+
     def update(data)
       response = @connection.request(
           url: "/recovery-sets/#{@id}",
