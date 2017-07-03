@@ -36,6 +36,20 @@ module RMC::Item
       @connection.wait_for_task(response['taskUri'].split('/').last)
     end
 
+    def restore_to_recovery_set(id)
+      response = @connection.request(
+          :url => "/backup-sets/#{@id}/restore",
+          :payload => {
+              backupSet: {
+                  restoreRecoverysetId: id
+              }
+          },
+          :method => :post
+      )
+
+      @connection.wait_for_task(response['taskUri'].split('/').last)
+    end
+
   end
 
 end
