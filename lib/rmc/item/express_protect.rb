@@ -9,6 +9,7 @@ module RMC::Item
     attr_reader :name
     attr_reader :status
     attr_reader :createdAt
+    attr_reader :recoverySetId
 
     def initialize(connection, data)
       @connection = connection
@@ -17,6 +18,7 @@ module RMC::Item
       @name = data['name']
       @status = data['status']
       @createdAt = data['createdAt']
+      @recoverySetId = data['recoverySetId']
 
     end
 
