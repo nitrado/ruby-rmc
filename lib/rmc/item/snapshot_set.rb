@@ -41,6 +41,18 @@ module RMC::Item
       )
     end
 
+    def refresh
+      response = @connection.request(
+          url: "/snapshot-sets/#{@id}/refresh",
+          method: :put,
+          payload: {
+              snapshotSet: {}
+          }
+      )
+      @connection.wait_for_task(response['taskUri'].split('/').last)
+      true
+    end
+
     def restore(volume_list)
       @connection.request(
           :url => "/snapshot-sets/#{@id}/restore",
