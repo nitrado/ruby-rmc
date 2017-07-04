@@ -54,7 +54,7 @@ module RMC::Item
     end
 
     def restore(volume_list)
-      @connection.request(
+      response = @connection.request(
           :url => "/snapshot-sets/#{@id}/restore",
           :method => :post,
           :payload => {
