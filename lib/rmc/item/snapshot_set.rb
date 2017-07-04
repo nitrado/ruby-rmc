@@ -41,6 +41,22 @@ module RMC::Item
       )
     end
 
+    def restore(volume_list)
+      @connection.request(
+          :url => "/snapshot-sets/#{@id}/restore",
+          :method => :post,
+          :payload => {
+              snapshotSet: {
+                  online: true,
+                  volumelist: [volume_list.join(", ")]
+              }
+          }
+      )
+
+      @connection.wait_for_task(response['taskUri'].split('/').last)
+      true
+    end
+
     def delete
       @connection.request(
           :url => "/snapshot-sets/#{@id}",
