@@ -14,7 +14,7 @@ module RMC
       )
 
       volumes = []
-      response['storageSystem']['volumes'].each do |_data|
+      response['storageSystem']['volumes']['members'].each do |_data|
         volumes << RMC::Item::Volume.new(@connection, _data)
       end
 
