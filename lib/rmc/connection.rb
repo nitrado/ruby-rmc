@@ -23,7 +23,7 @@ module RMC
     def request(params)
       data = {
           method: :get,
-          timeout: 10,
+          timeout: 60,
           verify_ssl: @verify_ssl,
       }.merge(params)
 
