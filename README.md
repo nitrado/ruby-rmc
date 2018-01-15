@@ -1,6 +1,6 @@
-# HPE Recovery Manger Central
+# HPE Recovery Manager Central
 
-This is a Ruby library for the HPE Recovery Manger Central (RMC).
+This is a Ruby library for the HPE Recovery Manager Central (RMC).
 
 ## Good to know
 
